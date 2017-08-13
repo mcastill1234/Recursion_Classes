@@ -31,7 +31,7 @@ def get_permutations(sequence):
     return perm_list
 
 if __name__ == '__main__':
-#    #EXAMPLE
+
     example_input = 'abc'
     print('Input:', example_input)
     print('Expected Output:', ['abc', 'acb', 'bac', 'bca', 'cab', 'cba'])

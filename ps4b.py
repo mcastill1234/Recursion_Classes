@@ -1,11 +1,12 @@
 # Problem Set 4B
-# Name: <your name here>
-# Collaborators:
-# Time Spent: x:xx
+# Name: Mario Castillo
+# Collaborators: None
+# Time Spent: from 08/13/2017 to
 
 import string
 
 ### HELPER CODE ###
+
 def load_words(file_name):
     '''
     file_name (string): the name of the file containing 
@@ -37,9 +38,9 @@ def is_word(word_list, word):
     Returns: True if word is in word_list, False otherwise
 
     Example:
-    >>> is_word(word_list, 'bat') returns
+    # >>> is_word(word_list, 'bat') returns
     True
-    >>> is_word(word_list, 'asdf') returns
+    # >>> is_word(word_list, 'asdf') returns
     False
     '''
     word = word.lower()
@@ -61,37 +62,33 @@ WORDLIST_FILENAME = 'words.txt'
 
 class Message(object):
     def __init__(self, text):
-        '''
-        Initializes a Message object
+        '''Initializes a Message object
                 
         text (string): the message's text
 
         a Message object has two attributes:
             self.message_text (string, determined by input text)
-            self.valid_words (list, determined using helper function load_words)
-        '''
-        pass #delete this line and replace with your code here
+            self.valid_words (list, determined using helper function load_words)'''
+
+        self.message_text = text
+        self.valid_words = load_words("words.txt")
 
     def get_message_text(self):
-        '''
-        Used to safely access self.message_text outside of the class
+        '''Used to safely access self.message_text outside of the class
         
-        Returns: self.message_text
-        '''
-        pass #delete this line and replace with your code here
+        Returns: self.message_text'''
+
+        return self.message_text
 
     def get_valid_words(self):
-        '''
-        Used to safely access a copy of self.valid_words outside of the class.
+        '''Used to safely access a copy of self.valid_words outside of the class.
         This helps you avoid accidentally mutating class attributes.
         
-        Returns: a COPY of self.valid_words
-        '''
-        pass #delete this line and replace with your code here
+        Returns: a COPY of self.valid_words'''
+        return self.valid_words[:]
 
     def build_shift_dict(self, shift):
-        '''
-        Creates a dictionary that can be used to apply a cipher to a letter.
+        '''Creates a dictionary that can be used to apply a cipher to a letter.
         The dictionary maps every uppercase and lowercase letter to a
         character shifted down the alphabet by the input shift. The dictionary
         should have 52 keys of all the uppercase letters and all the lowercase
@@ -101,9 +98,9 @@ class Message(object):
         alphabet. 0 <= shift < 26
 
         Returns: a dictionary mapping a letter (string) to 
-                 another letter (string). 
-        '''
-        pass #delete this line and replace with your code here
+                 another letter (string).'''
+
+
 
     def apply_shift(self, shift):
         '''
@@ -217,7 +214,14 @@ if __name__ == '__main__':
 #    print('Expected Output:', (24, 'hello'))
 #    print('Actual Output:', ciphertext.decrypt_message())
 
-    #TODO: WRITE YOUR TEST CASES HERE
+    msg = Message('Hello World')
+    print(msg.message_text)
+    msg1 = msg.get_message_text()
+    print(msg1)
+    temp_valids = msg.get_valid_words()
+    temp_valids[1] = 'Hello World'
+    print(temp_valids[1])
+    print(msg.valid_words[1])
 
     #TODO: best shift value and unencrypted story 
     

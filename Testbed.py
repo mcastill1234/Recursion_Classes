@@ -4,15 +4,19 @@ shift_dict = {}
 dkeysl = string.ascii_lowercase
 dkeysu = string.ascii_uppercase
 
-shift = 2
+shift = 4
 
-
-if
 for char in dkeysl:
-    shift_dict[char] = dke
+    if dkeysl.index(char) + shift < 26:
+        shift_dict[char] = dkeysl[dkeysl.index(char)+shift]
+    elif dkeysl.index(char) + shift >= 26:
+        shift_dict[char] = dkeysl[dkeysl.index(char)+shift-26]
 
-char = 'c'
-shift = 2
+for char in dkeysu:
+    if dkeysu.index(char) + shift < 26:
+        shift_dict[char] = dkeysu[dkeysu.index(char)+shift]
+    elif dkeysu.index(char) + shift >= 26:
+        shift_dict[char] = dkeysu[dkeysu.index(char)+shift-26]
 
-temp = dkeysl[dkeysl.index(char)+shift]
-print(temp)
+print(shift_dict.keys())
+print(shift_dict.values())

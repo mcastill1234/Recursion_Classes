@@ -197,7 +197,8 @@ class CiphertextMessage(Message):
         a CiphertextMessage object has two attributes:
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)"""
-        pass #delete this line and replace with your code here
+
+        Message.__init__(self, text)
 
     def decrypt_message(self):
         """Decrypt self.message_text by trying every possible shift value
@@ -213,7 +214,14 @@ class CiphertextMessage(Message):
 
         Returns: a tuple of the best shift value used to decrypt the message
         and the decrypted message text using that shift value"""
-        pass #delete this line and replace with your code here
+
+        word_counter = 0
+        max_count = 0
+
+        for i in range(26):
+            msg_list = self.message_text.splt(' ')
+            print(msg_list)
+
 
 if __name__ == '__main__':
 
@@ -228,17 +236,19 @@ if __name__ == '__main__':
     #    print('Actual Output:', ciphertext.decrypt_message())
 
     plmsg = PlaintextMessage(('Hello.World'), 4)
-    print(plmsg.message_text)
-    print(plmsg.message_text_encrypted)
-    print(plmsg.get_shift())
-    print(plmsg.get_encryption_dict())
-    print(plmsg.get_message_text_encrypted())
-    plmsg.change_shift(7)
-    print(plmsg.message_text)
-    print(plmsg.message_text_encrypted)
-    print(plmsg.get_shift())
-    print(plmsg.get_encryption_dict())
-    print(plmsg.get_message_text_encrypted())
+    # print(plmsg.message_text)
+    # print(plmsg.message_text_encrypted)
+    # print(plmsg.get_shift())
+    # print(plmsg.get_encryption_dict())
+    # print(plmsg.get_message_text_encrypted())
+    # plmsg.change_shift(7)
+    # print(plmsg.message_text)
+    # print(plmsg.message_text_encrypted)
+    # print(plmsg.get_shift())
+    # print(plmsg.get_encryption_dict())
+    # print(plmsg.get_message_text_encrypted())
+
+    CiphertextMessage.decrypt_message(plmsg.get_message_text_encrypted())
 
     #TODO: best shift value and unencrypted story
     

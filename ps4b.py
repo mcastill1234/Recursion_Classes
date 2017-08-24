@@ -1,7 +1,7 @@
 # Problem Set 4B
 # Name: Mario Castillo
 # Collaborators: None
-# Time Spent: from 08/13/2017 to
+# Time Spent: from 08/13/2017 to 08/24/2017 --- Had too much work at the office!
 
 import string
 
@@ -217,10 +217,18 @@ class CiphertextMessage(Message):
 
         word_counter = 0
         max_count = 0
-
+        best = 0
+        decrypted = ''
         for i in range(26):
-            msg_list = self.message_text.splt(' ')
-            print(msg_list)
+            enc_list = self.apply_shift(i).split(' ')
+            for word in enc_list:
+                if is_word(self.valid_words, word):
+                    word_counter += 1
+                if word_counter > max_count:
+                    max_count = word_counter
+                    best = i
+        decrypted = self.apply_shift(best)
+        return (best, decrypted)
 
 
 if __name__ == '__main__':
@@ -230,12 +238,16 @@ if __name__ == '__main__':
     #    print('Expected Output: jgnnq')
     #    print('Actual Output:', plaintext.get_message_text_encrypted())
     #
-    #    #Example test case (CiphertextMessage)
-    #    ciphertext = CiphertextMessage('jgnnq')
-    #    print('Expected Output:', (24, 'hello'))
-    #    print('Actual Output:', ciphertext.decrypt_message())
+    #Example test case (CiphertextMessage)
+    ciphertext = CiphertextMessage('jgnnq').decrypt_message()
+    print('Expected Output:', (24, 'hello'))
+    # print('Actual Output:', ciphertext.decrypt_message())
+    print('Actual Output:', ciphertext)
 
-    plmsg = PlaintextMessage(('Hello.World'), 4)
+    # plmsg = PlaintextMessage(('Hello World'), 4)
+
+    # ciphertext = CiphertextMessage(plmsg.get_message_text_encrypted()).decrypt_message()
+    # print(ciphertext)
     # print(plmsg.message_text)
     # print(plmsg.message_text_encrypted)
     # print(plmsg.get_shift())
@@ -247,8 +259,6 @@ if __name__ == '__main__':
     # print(plmsg.get_shift())
     # print(plmsg.get_encryption_dict())
     # print(plmsg.get_message_text_encrypted())
-
-    CiphertextMessage.decrypt_message(plmsg.get_message_text_encrypted())
 
     #TODO: best shift value and unencrypted story
     

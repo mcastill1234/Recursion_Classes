@@ -220,9 +220,12 @@ class CiphertextMessage(Message):
         best = 0
         decrypted = ''
         for i in range(26):
+            word_counter = 0
             enc_list = self.apply_shift(i).split(' ')
             for word in enc_list:
-                if is_word(self.valid_words, word):
+                if not is_word(self.valid_words, word):
+                    continue
+                elif is_word(self.valid_words, word):
                     word_counter += 1
                 if word_counter > max_count:
                     max_count = word_counter
@@ -232,24 +235,27 @@ class CiphertextMessage(Message):
 
 if __name__ == '__main__':
 
-    # Test case #1 - PlaintextMessage
+    print('Test case #1 - PlaintextMessage:')
     plaintext = PlaintextMessage('hello', 2)
     print('Expected Output: jgnnq')
     print('Actual Output:', plaintext.get_message_text_encrypted())
 
-    # Test case #1 - CiphertextMessage
+    print('Test case #1 - CiphertextMessage:')
     ciphertext = CiphertextMessage('jgnnq')
     print('Expected Output:', (24, 'hello'))
     print('Actual Output:', ciphertext.decrypt_message())
 
-    # Test case #2 - PlaintextMessage
+    print('Test case #2 - PlaintextMessage:')
     plaintext = PlaintextMessage('Hello World', 2)
     print('Expected Output: Jgnnq Yqtnf')
     print('Actual Output:', plaintext.get_message_text_encrypted())
 
-    # Test case #2 - CiphertextMessage
+    print('Test case #2 - CiphertextMessage:')
     ciphertext = CiphertextMessage('Jgnnq Yqtnf')
     print('Expected Output:', (24, 'Hello World'))
     print('Actual Output:', ciphertext.decrypt_message())
 
-    #TODO: best shift value and unencrypted story
+
+    # Test case #3 - Story string
+    ciphertext = CiphertextMessage(get_story_string())
+    print(ciphertext.decrypt_message())

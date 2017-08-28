@@ -1,7 +1,7 @@
 # Problem Set 4C
-# Name: <your name here>
-# Collaborators:
-# Time Spent: x:xx
+# Name: Mario Castillo
+# Collaborators: None
+# Time Spent: from 08/27/2017 to...
 
 import string
 from ps4a import get_permutations
@@ -39,9 +39,9 @@ def is_word(word_list, word):
     Returns: True if word is in word_list, False otherwise
 
     Example:
-    >>> is_word(word_list, 'bat') returns
+    >> is_word(word_list, 'bat') returns
     True
-    >>> is_word(word_list, 'asdf') returns
+    >> is_word(word_list, 'asdf') returns
     False
     '''
     word = word.lower()
@@ -61,66 +61,72 @@ CONSONANTS_UPPER = 'BCDFGHJKLMNPQRSTVWXYZ'
 
 class SubMessage(object):
     def __init__(self, text):
-        '''
-        Initializes a SubMessage object
-                
+        """Initializes a SubMessage object
+
         text (string): the message's text
 
         A SubMessage object has two attributes:
             self.message_text (string, determined by input text)
-            self.valid_words (list, determined using helper function load_words)
-        '''
-        pass #delete this line and replace with your code here
+            self.valid_words (list, determined using helper function load_words)"""
+
+        self.message_text = text
+        self.valid_words = load_words("words.txt")
     
     def get_message_text(self):
-        '''
-        Used to safely access self.message_text outside of the class
-        
-        Returns: self.message_text
-        '''
-        pass #delete this line and replace with your code here
+        """Used to safely access self.message_text outside of the class
+        Returns: self.message_text"""
+
+        return self.message_text
 
     def get_valid_words(self):
-        '''
-        Used to safely access a copy of self.valid_words outside of the class.
+        """Used to safely access a copy of self.valid_words outside of the class.
         This helps you avoid accidentally mutating class attributes.
-        
-        Returns: a COPY of self.valid_words
-        '''
-        pass #delete this line and replace with your code here
+
+        Returns: a COPY of self.valid_words """
+
+        return self.valid_words
                 
     def build_transpose_dict(self, vowels_permutation):
-        '''
-        vowels_permutation (string): a string containing a permutation of vowels (a, e, i, o, u)
-        
+
+        """vowels_permutation (string): a string containing a permutation of vowels (a, e, i, o, u)
+
         Creates a dictionary that can be used to apply a cipher to a letter.
         The dictionary maps every uppercase and lowercase letter to an
-        uppercase and lowercase letter, respectively. Vowels are shuffled 
-        according to vowels_permutation. The first letter in vowels_permutation 
+        uppercase and lowercase letter, respectively. Vowels are shuffled
+        according to vowels_permutation. The first letter in vowels_permutation
         corresponds to a, the second to e, and so on in the order a, e, i, o, u.
-        The consonants remain the same. The dictionary should have 52 
+        The consonants remain the same. The dictionary should have 52
         keys of all the uppercase letters and all the lowercase letters.
 
         Example: When input "eaiuo":
         Mapping is a->e, e->a, i->i, o->u, u->o
         and "Hello World!" maps to "Hallu Wurld!"
 
-        Returns: a dictionary mapping a letter (string) to 
-                 another letter (string). 
-        '''
-        
-        pass #delete this line and replace with your code here
+        Returns: a dictionary mapping a letter (string) to
+                 another letter (string). """
+        transpose_dict = {}
+        for var in range(5):
+            transpose_dict[VOWELS_LOWER[var]] = vowels_permutation[var]
+            transpose_dict[VOWELS_UPPER[var]] = vowels_permutation[var].upper()
+        for var in CONSONANTS_LOWER:
+            transpose_dict[var] = var
+            transpose_dict[var.upper()] = var.upper()
+        return transpose_dict
     
     def apply_transpose(self, transpose_dict):
-        '''
-        transpose_dict (dict): a transpose dictionary
+        """ transpose_dict (dict): a transpose dictionary
+
+        Returns: an encrypted version of the message text, based
+        on the dictionary"""
         
-        Returns: an encrypted version of the message text, based 
-        on the dictionary
-        '''
-        
-        pass #delete this line and replace with your code here
-        
+        enc_msg = ''
+        for var in self.message_text:
+            if var not in transpose_dict.keys():
+                enc_msg += var
+            else:
+                enc_msg += transpose_dict[var]
+        return enc_msg
+
 class EncryptedSubMessage(SubMessage):
     def __init__(self, text):
         '''
@@ -161,10 +167,12 @@ if __name__ == '__main__':
     message = SubMessage("Hello World!")
     permutation = "eaiuo"
     enc_dict = message.build_transpose_dict(permutation)
+    # print(enc_dict)
+    # print(len(enc_dict))
     print("Original message:", message.get_message_text(), "Permutation:", permutation)
     print("Expected encryption:", "Hallu Wurld!")
     print("Actual encryption:", message.apply_transpose(enc_dict))
-    enc_message = EncryptedSubMessage(message.apply_transpose(enc_dict))
-    print("Decrypted message:", enc_message.decrypt_message())
+    # enc_message = EncryptedSubMessage(message.apply_transpose(enc_dict))
+    # print("Decrypted message:", enc_message.decrypt_message())
      
     #TODO: WRITE YOUR TEST CASES HERE

@@ -1,12 +1,14 @@
 # Problem Set 4C
 # Name: Mario Castillo
 # Collaborators: None
-# Time Spent: from 08/27/2017 to...
+# Time Spent: from 08/27/2017 to 08/31/2017
 
 import string
 from ps4a import get_permutations
 
-### HELPER CODE ###
+##HELPER CODE #
+
+
 def load_words(file_name):
     '''
     file_name (string): the name of the file containing 
@@ -27,6 +29,7 @@ def load_words(file_name):
         wordlist.extend([word.lower() for word in line.split(' ')])
     print("  ", len(wordlist), "words loaded.")
     return wordlist
+
 
 def is_word(word_list, word):
     '''
@@ -49,7 +52,7 @@ def is_word(word_list, word):
     return word in word_list
 
 
-### END HELPER CODE ###
+# END HELPER CODE #
 
 WORDLIST_FILENAME = 'words.txt'
 
@@ -58,6 +61,7 @@ VOWELS_LOWER = 'aeiou'
 VOWELS_UPPER = 'AEIOU'
 CONSONANTS_LOWER = 'bcdfghjklmnpqrstvwxyz'
 CONSONANTS_UPPER = 'BCDFGHJKLMNPQRSTVWXYZ'
+
 
 class SubMessage(object):
     def __init__(self, text):
@@ -127,39 +131,52 @@ class SubMessage(object):
                 enc_msg += transpose_dict[var]
         return enc_msg
 
+
 class EncryptedSubMessage(SubMessage):
     def __init__(self, text):
-        '''
-        Initializes an EncryptedSubMessage object
+        """Initializes an EncryptedSubMessage object
 
         text (string): the encrypted message text
 
         An EncryptedSubMessage object inherits from SubMessage and has two attributes:
             self.message_text (string, determined by input text)
-            self.valid_words (list, determined using helper function load_words)
-        '''
-        pass #delete this line and replace with your code here
+            self.valid_words (list, determined using helper function load_words) """
+
+        SubMessage.__init__(self, text)
 
     def decrypt_message(self):
-        '''
-        Attempt to decrypt the encrypted message 
-        
+        """Attempt to decrypt the encrypted message
+
         Idea is to go through each permutation of the vowels and test it
         on the encrypted message. For each permutation, check how many
         words in the decrypted text are valid English words, and return
         the decrypted message with the most English words.
-        
-        If no good permutations are found (i.e. no permutations result in 
+
+        If no good permutations are found (i.e. no permutations result in
         at least 1 valid word), return the original string. If there are
         multiple permutations that yield the maximum number of words, return any
         one of them.
 
-        Returns: the best decrypted message    
-        
-        Hint: use your function from Part 4A
-        '''
-        pass #delete this line and replace with your code here
-    
+        Returns: the best decrypted message
+
+        Hint: use your function from Part 4A"""
+
+        perm_vows = get_permutations('aeiou')
+        max_count = 0
+        for perms in perm_vows:
+            word_count = 0
+            temp_dict = self.build_transpose_dict(perms)
+            new_msg = self.apply_transpose(temp_dict)
+            dec_list = new_msg.split(' ')
+            for new_word in dec_list:
+                if new_word not in dec_list:
+                    continue
+                elif is_word(self.valid_words, new_word):
+                    word_count += 1
+                if word_count > max_count:
+                    max_count = word_count
+                    best_word = new_msg
+        return best_word
 
 if __name__ == '__main__':
 
@@ -172,7 +189,7 @@ if __name__ == '__main__':
     print("Original message:", message.get_message_text(), "Permutation:", permutation)
     print("Expected encryption:", "Hallu Wurld!")
     print("Actual encryption:", message.apply_transpose(enc_dict))
-    # enc_message = EncryptedSubMessage(message.apply_transpose(enc_dict))
-    # print("Decrypted message:", enc_message.decrypt_message())
+    enc_message = EncryptedSubMessage(message.apply_transpose(enc_dict))
+    print("Decrypted message:", enc_message.decrypt_message())
      
     #TODO: WRITE YOUR TEST CASES HERE

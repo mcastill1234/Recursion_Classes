@@ -5,7 +5,8 @@
 
 import string
 
-### HELPER CODE ###
+# HELPER CODE #
+
 
 def load_words(file_name):
     """file_name (string): the name of the file containing
@@ -26,6 +27,7 @@ def load_words(file_name):
     # print("  ", len(wordlist), "words loaded.")
     return wordlist
 
+
 def is_word(word_list, word):
     """Determines if word is a valid word, ignoring
     capitalization and punctuation
@@ -44,6 +46,7 @@ def is_word(word_list, word):
     word = word.strip(" !@#$%^&*()-_+={}[]|\:;'<>?,./\"")
     return word in word_list
 
+
 def get_story_string():
     """Returns: a story in encrypted text."""
 
@@ -52,7 +55,8 @@ def get_story_string():
     f.close()
     return story
 
-### END HELPER CODE ###
+# END HELPER CODE #
+
 
 class Message(object):
     def __init__(self, text):
@@ -254,7 +258,6 @@ if __name__ == '__main__':
     ciphertext = CiphertextMessage('Jgnnq Yqtnf')
     print('Expected Output:', (24, 'Hello World'))
     print('Actual Output:', ciphertext.decrypt_message())
-
 
     # Test case #3 - Story string
     ciphertext = CiphertextMessage(get_story_string())

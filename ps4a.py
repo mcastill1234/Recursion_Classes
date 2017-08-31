@@ -4,16 +4,16 @@
 # Time Spent: From 08/12/2017 to 08/13/2017
 
 def get_permutations(sequence):
-    ''' Enumerate all permutations of a given string
+    """Enumerate all permutations of a given string
 
     sequence (string): an arbitrary string to permute. Assume that it is a
-    non-empty string.  
+    non-empty string.
 
         Returns: a list of all permutations of sequence
 
     Example:
     get_permutations('abc')
-    ['abc', 'acb', 'bac', 'bca', 'cab', 'cba'] '''
+    ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']"""
 
     if len(sequence) == 1:
         return [sequence]  # Base case

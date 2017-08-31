@@ -180,7 +180,7 @@ class EncryptedSubMessage(SubMessage):
 
 if __name__ == '__main__':
 
-    # Example test case
+    # Example test case #1
     message = SubMessage("Hello World!")
     permutation = "eaiuo"
     enc_dict = message.build_transpose_dict(permutation)
@@ -191,5 +191,18 @@ if __name__ == '__main__':
     print("Actual encryption:", message.apply_transpose(enc_dict))
     enc_message = EncryptedSubMessage(message.apply_transpose(enc_dict))
     print("Decrypted message:", enc_message.decrypt_message())
-     
+
+
+    # Example test case #1
+    message = SubMessage("Mario Castillo is the programmer of the year in winter!")
+    permutation = "eauoi"
+    enc_dict = message.build_transpose_dict(permutation)
+    # print(enc_dict)
+    # print(len(enc_dict))
+    print("Original message:", message.get_message_text(), "Permutation:", permutation)
+    print("Expected encryption:", "N/A")
+    print("Actual encryption:", message.apply_transpose(enc_dict))
+    enc_message = EncryptedSubMessage(message.apply_transpose(enc_dict))
+    print("Decrypted message:", enc_message.decrypt_message())
+
     #TODO: WRITE YOUR TEST CASES HERE

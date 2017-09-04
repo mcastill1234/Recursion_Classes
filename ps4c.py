@@ -20,14 +20,14 @@ def load_words(file_name):
     take a while to finish.
     '''
     
-    print("Loading word list from file...")
+    #print("Loading word list from file...")
     # inFile: file
     inFile = open(file_name, 'r')
     # wordlist: list of strings
     wordlist = []
     for line in inFile:
         wordlist.extend([word.lower() for word in line.split(' ')])
-    print("  ", len(wordlist), "words loaded.")
+    #print("  ", len(wordlist), "words loaded.")
     return wordlist
 
 
@@ -163,6 +163,7 @@ class EncryptedSubMessage(SubMessage):
 
         perm_vows = get_permutations('aeiou')
         max_count = 0
+        best_word = ''
         for perms in perm_vows:
             word_count = 0
             temp_dict = self.build_transpose_dict(perms)
